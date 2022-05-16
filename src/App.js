@@ -1,5 +1,6 @@
 import './App.css';
 import CountryList from './components/CountryList';
+import SearchAndFilter from './components/SearchAndFilter';
 import { useEffect, useState } from 'react';
 function App() {
   const [countryListData, setCountryListData] = useState([]);
@@ -17,6 +18,7 @@ function App() {
   
   return (
     <div className="App">
+      <SearchAndFilter/>
       <CountryList countryListData={countryListData}/>
     </div>
   );
