@@ -16,12 +16,14 @@ export default function CountryList(props) {
                   <div className="card-body">
                     <h5 className="card-title">{ele.name.common}</h5>
                     <p className="card-text">
-                      Some quick example text to build on the card title and
-                      make up the bulk of the card's content.
+                      Population: {ele.population}
                     </p>
-                    <a href="/" className="btn btn-primary">
-                      Go somewhere
-                    </a>
+                    <p className="card-text">
+                      Region: {ele.region}
+                    </p>
+                    <p className="card-text">
+                      Capital: {ele.capital&&ele.capital[0]}
+                    </p>
                   </div>
                 </div>
               </div>
