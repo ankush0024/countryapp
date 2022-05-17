@@ -18,6 +18,17 @@ function App() {
       ...tempData.filter((ele) => ele.name.common.toLowerCase().includes(searchTerm.toLowerCase())),
     ]);
   };
+  const RegionChangeCallback = (Region) => {
+    if(Region === "") {
+      setFilteredCountryListData([...countryListData]);
+    } else{
+    const tempData = [...countryListData];
+    setFilteredCountryListData([
+      ...tempData.filter((ele) => ele.region === Region),
+    ]);
+  }
+  };
+  
 
   useEffect(() => {
     fetchAllCountryDetails();
@@ -27,7 +38,7 @@ function App() {
 
   return (
     <div className="App">
-      <SearchAndFilter searchCallback={searchCallback} />
+      <SearchAndFilter searchCallback={searchCallback} RegionChangeCallback={RegionChangeCallback} countryListData={filteredcountryListData}/>
       <CountryList countryListData={filteredcountryListData} />
     </div>
   );

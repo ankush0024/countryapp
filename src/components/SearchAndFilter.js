@@ -1,7 +1,10 @@
 import React from 'react'
-
-export default function SearchAndFilter({searchCallback}) {
-   const handleInput = (event)=>{console.log(event);searchCallback(event?.target?.value)};
+import { useState } from 'react';
+export default function SearchAndFilter({RegionChangeCallback,searchCallback}) {
+   const handleInput = (event)=>{searchCallback(event?.target?.value)};
+   const handleRegionChange = (event)=>{setSelectedRegion(event.target.value);RegionChangeCallback(event.target.value);};
+   const regionList = ['Africa', 'Americas', 'Asia', 'Europe', 'Oceania'];
+   const [selectedRegion, setSelectedRegion] = useState('');
   return (
     <div className="container d-flex justify-content-between">
       <div>
@@ -10,37 +13,18 @@ export default function SearchAndFilter({searchCallback}) {
             className="form-control me-2"
             type="search"
             placeholder="Search for a country"
-            aria-label="Search" onInput={handleInput}
+            aria-label="Search"
+            onInput={handleInput}
           />
         </form>
       </div>
       <div className="dropdown">
-        <button
-          className="btn btn-secondary dropdown-toggle"
-          type="button"
-          id="dropdownMenuButton1"
-          data-bs-toggle="dropdown"
-          aria-expanded="false"
-        >
-          Filter By Region
-        </button>
-        <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-          <li>
-            <a className="dropdown-item" href="#">
-              Action
-            </a>
-          </li>
-          <li>
-            <a className="dropdown-item" href="#">
-              Another action
-            </a>
-          </li>
-          <li>
-            <a className="dropdown-item" href="#">
-              Something else here
-            </a>
-          </li>
-        </ul>
+        <select className="form-select"  value={selectedRegion} onChange ={handleRegionChange} aria-label="Default select example">
+        <option value="">Filter By Region</option>
+          {regionList.map((ele,index) => (
+            <option key={index} value={ele}>{ele}</option>
+          ))}
+          </select>
       </div>
     </div>
   );

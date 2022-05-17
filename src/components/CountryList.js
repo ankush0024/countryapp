@@ -1,10 +1,10 @@
 import React from "react";
 
-export default function CountryList(props) {
+export default function CountryList({countryListData}) {
   return (
     <div className="container">
-      {props.countryListData &&
-        props.countryListData.map((ele, index) => {
+      {countryListData &&
+        countryListData.map((ele, index) => {
           return (
             <div className="container">
               <div className="row" >
