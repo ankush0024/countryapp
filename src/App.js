@@ -4,22 +4,30 @@ import SearchAndFilter from './components/SearchAndFilter';
 import { useEffect, useState } from 'react';
 function App() {
   const [countryListData, setCountryListData] = useState([]);
-  const fetchAllCountryDetails = async() =>{
+  const [filteredcountryListData, setFilteredCountryListData] = useState([]);
+  const fetchAllCountryDetails = async () => {
     const res = await fetch('https://restcountries.com/v3.1/all');
     const data = await res.json();
     setCountryListData([...data]);
-     console.log(data);
+    setFilteredCountryListData([...data]);
   }
+  const searchCallback = (searchTerm) => {
+    const tempData = [...countryListData];
+    setFilteredCountryListData([
+      ...tempData.filter((ele) => ele.name.common.toLowerCase().includes(searchTerm.toLowerCase())),
+    ]);
+  };
+  
   useEffect(() => {
     fetchAllCountryDetails();
     return () => {
     }
   }, [])
-  
+
   return (
     <div className="App">
-      <SearchAndFilter/>
-      <CountryList countryListData={countryListData}/>
+      <SearchAndFilter searchCallback={searchCallback} />
+      <CountryList countryListData={filteredcountryListData} />
     </div>
   );
 }
