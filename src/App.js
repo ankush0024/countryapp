@@ -6,7 +6,8 @@ function App() {
   const [countryListData, setCountryListData] = useState([]);
   const [filteredcountryListData, setFilteredCountryListData] = useState([]);
   const fetchAllCountryDetails = async () => {
-    const res = await fetch('https://restcountries.com/v3.1/all');
+    const url = process.env.REACT_APP_COUNTRY_LIST_API_ENDPOINT ;
+    const res = await fetch(url);
     const data = await res.json();
     setCountryListData([...data]);
     setFilteredCountryListData([...data]);
@@ -17,7 +18,7 @@ function App() {
       ...tempData.filter((ele) => ele.name.common.toLowerCase().includes(searchTerm.toLowerCase())),
     ]);
   };
-  
+
   useEffect(() => {
     fetchAllCountryDetails();
     return () => {
